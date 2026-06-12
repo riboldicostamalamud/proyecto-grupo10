@@ -32,15 +32,22 @@ def leer_archivo(nombre_archivo):
 
     return lista
 
-def filtrar_sub_categorias(registros):
+#filtrar_sub_categorias : List[Dict] -> List[Str]
+#toma la lista de diccionarios con los datos del dataset filtrados con el descuento
+#crea y devuelve una lista con los nombres de las subcategorias sin repetir
+def filtrar_sub_categorias(registros_filtrados):
     sub_categorias = []
 
-    for metodo in registros:
-        if metodo["Sub-Category"] not in sub_categorias:
-            sub_categorias.append(metodo["Sub-Category"])
+    for registro in registros_filtrados:
+        if registro["Sub-Category"] not in sub_categorias:
+            sub_categorias.append(registro["Sub-Category"])
     
     return sub_categorias
 
+#filtrar_cantidad_de_ventas : List[Dict] -> Dict[Str, Int]
+#toma una lista con los registros filtrados
+#devuelve un diccionario con cuya clave es una subcategoria
+#y el valor es la suma de las cantidades de vendidas de esa subcategoria
 def filtrar_cantidad_de_ventas(registros_filtrados):
     acumulador = {}
 
@@ -55,6 +62,11 @@ def filtrar_cantidad_de_ventas(registros_filtrados):
 
     return acumulador
 
+
+#maximo_descuento_sub_categoria : List[Dict] -> Dict[str, float]
+#toma una lista de registros filtrados
+#devuelve un diccionario cuya clave es la subctegoria
+#y el valor es el descuento maximo aplicado a esa categoria
 def maximo_descuento_sub_categoria(registros_filtrados):
     maximos = {}
 
@@ -73,35 +85,29 @@ def maximo_descuento_sub_categoria(registros_filtrados):
     return maximos
 
 
-def total_ventas(registros_filtrados):
-    ventas = {}
+#sumar_por_subcategoria : List[Dict] str -> Dict[str, float]
+#toma una lista de registros filtrados y el nombre de una de las columnas
+#devuelve un diccionario cuya clave es una subcategoria
+#y el valor es la suma de los valores de esa columna para dicha categoria
+def sumar_por_subcategoria(registros_filtrados, columna):
+    acumulador = {}
 
     for registro in registros_filtrados:
         subcategoria = registro["Sub-Category"]
-        venta = float(registro["Sales"])
+        valor = float(registro[columna])
 
-        if subcategoria in ventas:
-            ventas[subcategoria] += venta
+        if subcategoria in acumulador:
+            acumulador[subcategoria] += valor
         else:
-            ventas[subcategoria] = venta
-
-    return ventas
-
-def total_ganancias(registros_filtrados):
-    ganancias = {}
-
-    for registro in registros_filtrados:
-        subcategoria = registro["Sub-Category"]
-        ganancia = float(registro["Profit"])
-
-        if subcategoria in ganancias:
-            ganancias[subcategoria] += ganancia
-        else:
-            ganancias[subcategoria] = ganancia
+            acumulador[subcategoria] = valor
     
-    return ganancias
+    return acumulador
 
 
+#filtrar_registros : List[dict] int -> List[dict] 
+#toma los registros del dataset y un porcentaje de descuento
+#filtra todos los registros que tengan un descuento mayor o igual al porcentaje
+#devuelve una nueva lista con los registros filtrados con la condicion
 def filtrar_registros(registros,porcentaje):
     porcentaje = porcentaje / 100
     registros_filtrados = []
@@ -113,12 +119,23 @@ def filtrar_registros(registros,porcentaje):
     return registros_filtrados
 
 
+#slider : None -> Int
+#muestra un slider con los valores entre 0 y 100
+#permite al usuario seleccionar un porcentaje de descuento
+#devuelve el porcentaje elegido
 def slider():
     rango = range(0,100)
     porcentaje_slider = st.select_slider("descuento aplicado", options=rango)
     return porcentaje_slider
 
 
+#mostrar_tabla_slider : List[Dict] -> None
+#toma una lista de registros del dataset
+#obtiene el porcentaje seleccionado por el usuario
+#filtra los registros segun dicho porcentaje
+#calcula la informacion de cada subcategoria
+#muestra una tabla con los descuentos maximos, cantidades vendidas, ventas y ganancias
+#para crear la tabla se utiliza streamlit
 def mostrar_tabla_slider(registros):
     porcentaje = slider()
 
@@ -126,8 +143,8 @@ def mostrar_tabla_slider(registros):
     sub_categorias = filtrar_sub_categorias(registros_filtrados)
     cantidad_de_ventas = filtrar_cantidad_de_ventas(registros_filtrados)
     descuentos_maximos = maximo_descuento_sub_categoria(registros_filtrados)
-    ventas_con_descuento = total_ventas(registros_filtrados)
-    ganancias = total_ganancias(registros_filtrados)
+    ventas_con_descuento = sumar_por_subcategoria(registros_filtrados, "Sales")
+    ganancias = sumar_por_subcategoria(registros_filtrados,"Profit")
 
     filas = []
 
@@ -149,7 +166,6 @@ def main():
     st.title ("Proyecto Grupal de Programación")
 
     registros = leer_archivo("SampleSuperstore_geo.csv")
-
     mostrar_tabla_slider(registros)
 
 
