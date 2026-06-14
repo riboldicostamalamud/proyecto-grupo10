@@ -94,10 +94,17 @@ def mostrar_grafico_ship_mode(registros):
 #===============================================================
 #GRAFICO-2 FUNCIONES
 
-def convertir_diccionario_a_lista(diccionario):
+def convertir_diccionario_a_lista_values(diccionario):
     lista = []
     for clave in diccionario:
         lista.append(diccionario[clave])
+    
+    return lista
+
+def convertir_diccionario_a_lista_keys(diccionario):
+    lista = []
+    for clave in diccionario.keys():
+        lista.append(clave)
     
     return lista
 
@@ -106,9 +113,10 @@ def mostrar_grafico_categorias(registros):
 
     contador = contar_columna(registros,"Category")
     porcentajes = calcular_porcentajes_columna(contador)
-
-    contador = convertir_diccionario_a_lista(contador)
-    porcentajes = convertir_diccionario_a_lista(porcentajes)
+    
+    
+    contador = convertir_diccionario_a_lista_keys(contador)
+    porcentajes = convertir_diccionario_a_lista_values(porcentajes)
 
     recipe = contador
     data = porcentajes
