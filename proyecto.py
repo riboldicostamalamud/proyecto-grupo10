@@ -140,6 +140,54 @@ def mostrar_grafico_categorias(registros):
     st.pyplot(fig)
     plt.show()
 
+#===============================================================
+#GRAFICO-3 FUNCIONES
+
+#sumar_por_categoria : List[Dict] Str Str -> Dict[Str, float]
+#la funcion toma una lista de de diccionario de los registros, una columna que se usara como categoria
+#y otra columna numerica donde sus valores se sumaran
+#devuelve un diccionario donde cada clave es un valor de la categoria(sin repetir)
+#y cada valor es es la suma acumulada de la columna numerica dada
+def sumar_por_categoria(registros, columna_categoria, columna_valor):
+    acumulador = {}
+
+    for registro in registros:
+        categoria = registro[columna_categoria]
+        valor = float(registro[columna_valor])
+
+        if categoria in acumulador:
+            acumulador[categoria] += valor
+        else:
+            acumulador[categoria] = valor
+
+    return acumulador
+
+
+#mostrar_grafico_barras : List[Dict] -> None
+#toma una lista de diccionario del dataset
+#calcula la suma de las ganancias para cada tipo de cliente
+#crea un grafico de barras donde cada barra representa un tipo de cliente
+#y su altura corresponde a las ganancias generadas
+#muestra el grafico utilizando matplotlib
+def mostrar_grafico_barras(registros):
+
+    ganancias = sumar_por_categoria(registros, "Segment", "Profit")
+    
+    fig, ax = plt.subplots()
+
+    fruits = ganancias.keys()
+    counts = ganancias.values()
+    bar_labels = ['red', 'blue', 'orange']
+    bar_colors = ['tab:red', 'tab:blue', 'tab:orange']
+
+    ax.bar(fruits, counts, label=bar_labels, color=bar_colors)
+
+    ax.set_ylabel('Ganancias')
+    ax.set_title('Tipo de clientes con mas ventas')
+
+    plt.show()
+    st.pyplot(fig)
+
 
 #==============================================================
 # GRAFICO-4 FUNCIONES
@@ -296,7 +344,7 @@ def main():
 
     with col4:
         with st.container(border=True):
-            mostrar_grafico_ship_mode(registros)
+            mostrar_grafico_barras(registros)
 
     
 if __name__ == "__main__":
