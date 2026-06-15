@@ -321,6 +321,75 @@ def mostrar_tabla_slider(registros):
 
     return st.table(tabla)
 
+
+#==============================================================
+# GRAFICO-6 FUNCIONES
+
+#filtrar_categorias: List[Dict] -> List[str]
+#toma una lista de registros
+#devuelve una lista con todas las categorias dentro
+def filtrar_categorias(registros):
+    categorias = []
+
+    for registro in registros:
+        if registro["Category"] not in categorias:
+            categorias.append(registro["Category"])
+    
+    return categorias
+
+#entrada_mapa: List[Dict] -> ....
+#toma una lista de registros 
+#devuelve un menu desplegable y un mapa
+def entrada_mapa(registros):
+    categorias = filtrar_categorias(registros)
+    option = st.selectbox(
+        "Sobre que categoria desea conocer las perdidas/ganancias",
+        categorias,
+        index=None,
+        placeholder="Seleccione una categoria",
+    )
+
+    st.write("Usted selecciono:", option)
+    if option is not None:
+        mapa(registros, option)
+
+#filtrar_longitudes : List[Dict] Str -> List[float]
+#toma una lista de registros y un string que hace referencia a una categoria seleccionada
+#devuelve una lista con todas las longitudes que dada una categoria seleccionada contenga profit negativo
+def filtrar_longitudes(registros,seleccion):
+    lista_inicial = []
+
+    for registro in registros:
+        if seleccion == registro["Category"]:
+            if float(registro["Profit"]) < 0:
+                lista_inicial.append(float(registro["Longitude\n"]))
+    return lista_inicial
+
+#filtrar_latitudes : List[Dict] Str -> List[float]
+#toma una lista de registros y un string que hace referencia a una categoria seleccionada
+#devuelve una lista con todas las latitudes que dada una categoria seleccionada contenga profit negativo
+def filtrar_latitudes(registros,seleccion):
+    lista_inicial = []
+
+    for registro in registros:
+        if seleccion == registro["Category"]:
+            if float(registro["Profit"]) < 0:
+                lista_inicial.append(float(registro["Latitude"]))
+    return lista_inicial
+
+#mapa : List[Dict] Str-> None
+#toma una lista de registros y un string que hace referencia a una categoria seleccionada
+#devuelve un mapa
+def mapa(registros,seleccion):
+    latitudes = filtrar_latitudes(registros,seleccion)
+    longitudes = filtrar_longitudes(registros,seleccion)
+    
+    dic_aux = {"lat": latitudes,"lon": longitudes}
+    df = pd.DataFrame(dic_aux)
+
+    st.map(df)
+
+
 def main():
     registros = leer_archivo("SampleSuperstore_geo.csv")
 
@@ -345,6 +414,9 @@ def main():
     with col4:
         with st.container(border=True):
             mostrar_grafico_barras(registros)
+
+    with st.container(border=True):
+        entrada_mapa(registros)
 
     
 if __name__ == "__main__":
