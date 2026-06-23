@@ -123,8 +123,8 @@ def filtrar_registros(registros,porcentaje):
 #muestra un slider con los valores entre 0 y 100
 #permite al usuario seleccionar un porcentaje de descuento
 #devuelve el porcentaje elegido
-def slider():
-    rango = range(0,100)
+def slider()->int :
+    rango = range(10,81)
     porcentaje_slider = st.select_slider("descuento aplicado", options=rango)
     return porcentaje_slider
 
@@ -157,9 +157,7 @@ def mostrar_tabla_slider(registros):
             "Ganancias": f"${ganancias[sub_categoria]:.2f}",
         })
 
-    tabla = pd.DataFrame(filas)
-
-    return st.table(tabla)
+    return st.table(filas)
 
 
 def main():

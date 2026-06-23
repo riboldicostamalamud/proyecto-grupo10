@@ -93,9 +93,8 @@ def mapa(registros,seleccion):
     longitudes = filtrar_longitudes(registros,seleccion)
     
     dic_aux = {"lat": latitudes,"lon": longitudes}
-    df = pd.DataFrame(dic_aux)
 
-    st.map(df)
+    st.map(dic_aux)
 
 def main():
     registros = leer_archivo("SampleSuperstore_geo.csv")
