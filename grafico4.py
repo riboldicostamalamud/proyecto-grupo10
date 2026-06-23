@@ -1,17 +1,13 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
-#nombre_archivo: str
-#claves: list[str]
-#datos: list[str]
-#fila2: dict[str, str]
-#leer_archivo: str -> list
+
+
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
-def leer_archivo(nombre_archivo):
+def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
 
@@ -32,10 +28,10 @@ def leer_archivo(nombre_archivo):
 
     return lista
 
-#filtrar_sub_categorias : List[Dict] -> List[Str]
+
 #toma la lista de diccionarios con los datos del dataset filtrados con el descuento
 #crea y devuelve una lista con los nombres de las subcategorias sin repetir
-def filtrar_sub_categorias(registros_filtrados):
+def filtrar_sub_categorias(registros_filtrados:list[dict])->list[str]:
     sub_categorias = []
 
     for registro in registros_filtrados:
@@ -44,11 +40,11 @@ def filtrar_sub_categorias(registros_filtrados):
     
     return sub_categorias
 
-#filtrar_cantidad_de_ventas : List[Dict] -> Dict[Str, Int]
+
 #toma una lista con los registros filtrados
 #devuelve un diccionario con cuya clave es una subcategoria
 #y el valor es la suma de las cantidades de vendidas de esa subcategoria
-def filtrar_cantidad_de_ventas(registros_filtrados):
+def filtrar_cantidad_de_ventas(registros_filtrados:list[dict])->dict[str, int]:
     acumulador = {}
 
     for registro in registros_filtrados:
@@ -63,11 +59,10 @@ def filtrar_cantidad_de_ventas(registros_filtrados):
     return acumulador
 
 
-#maximo_descuento_sub_categoria : List[Dict] -> Dict[str, float]
 #toma una lista de registros filtrados
 #devuelve un diccionario cuya clave es la subctegoria
 #y el valor es el descuento maximo aplicado a esa categoria
-def maximo_descuento_sub_categoria(registros_filtrados):
+def maximo_descuento_sub_categoria(registros_filtrados:list[dict])->dict[str, float]:
     maximos = {}
 
     for registro in registros_filtrados:
@@ -85,11 +80,11 @@ def maximo_descuento_sub_categoria(registros_filtrados):
     return maximos
 
 
-#sumar_por_subcategoria : List[Dict] str -> Dict[str, float]
+
 #toma una lista de registros filtrados y el nombre de una de las columnas
 #devuelve un diccionario cuya clave es una subcategoria
 #y el valor es la suma de los valores de esa columna para dicha categoria
-def sumar_por_subcategoria(registros_filtrados, columna):
+def sumar_por_subcategoria(registros_filtrados:list[dict], columna:str)-> dict[str, float]:
     acumulador = {}
 
     for registro in registros_filtrados:
@@ -129,14 +124,13 @@ def slider()->int :
     return porcentaje_slider
 
 
-#mostrar_tabla_slider : List[Dict] -> None
 #toma una lista de registros del dataset
 #obtiene el porcentaje seleccionado por el usuario
 #filtra los registros segun dicho porcentaje
 #calcula la informacion de cada subcategoria
 #muestra una tabla con los descuentos maximos, cantidades vendidas, ventas y ganancias
 #para crear la tabla se utiliza streamlit
-def mostrar_tabla_slider(registros):
+def mostrar_tabla_slider(registros:list[dict])-> None:
     porcentaje = slider()
 
     registros_filtrados = filtrar_registros(registros,porcentaje)

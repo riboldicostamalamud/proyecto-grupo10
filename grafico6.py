@@ -1,18 +1,14 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 from numpy.random import default_rng as rng
 
-#nombre_archivo: str
-#claves: list[str]
-#datos: list[str]
-#fila2: dict[str, str]
-#leer_archivo: str -> list
+
+
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
-def leer_archivo(nombre_archivo):
+def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
 
@@ -33,10 +29,10 @@ def leer_archivo(nombre_archivo):
 
     return lista
 
-#filtrar_categorias: List[Dict] -> List[str]
+
 #toma una lista de registros
 #devuelve una lista con todas las categorias dentro
-def filtrar_categorias(registros):
+def filtrar_categorias(registros:list[dict])-> list[str]:
     categorias = []
 
     for registro in registros:
@@ -45,10 +41,10 @@ def filtrar_categorias(registros):
     
     return categorias
 
-#entrada_mapa: List[Dict] -> ....
+
 #toma una lista de registros 
 #devuelve un menu desplegable y un mapa
-def entrada_mapa(registros):
+def entrada_mapa(registros:list[dict])-> None:
     categorias = filtrar_categorias(registros)
     option = st.selectbox(
         "Sobre que categoria desea conocer las perdidas/ganancias",
@@ -61,10 +57,11 @@ def entrada_mapa(registros):
     if option is not None:
         mapa(registros, option)
 
+
 #filtrar_longitudes : List[Dict] Str -> List[float]
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las longitudes que dada una categoria seleccionada contenga profit negativo
-def filtrar_longitudes(registros,seleccion):
+def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
     lista_inicial = []
 
     for registro in registros:
@@ -73,10 +70,11 @@ def filtrar_longitudes(registros,seleccion):
                 lista_inicial.append(float(registro["Longitude\n"]))
     return lista_inicial
 
+
 #filtrar_latitudes : List[Dict] Str -> List[float]
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las latitudes que dada una categoria seleccionada contenga profit negativo
-def filtrar_latitudes(registros,seleccion):
+def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
     lista_inicial = []
 
     for registro in registros:
@@ -85,16 +83,18 @@ def filtrar_latitudes(registros,seleccion):
                 lista_inicial.append(float(registro["Latitude"]))
     return lista_inicial
 
+
 #mapa : List[Dict] Str-> None
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve un mapa
-def mapa(registros,seleccion):
+def mapa(registros:list[dict], seleccion:str)-> None:
     latitudes = filtrar_latitudes(registros,seleccion)
     longitudes = filtrar_longitudes(registros,seleccion)
     
     dic_aux = {"lat": latitudes,"lon": longitudes}
 
     st.map(dic_aux)
+
 
 def main():
     registros = leer_archivo("SampleSuperstore_geo.csv")

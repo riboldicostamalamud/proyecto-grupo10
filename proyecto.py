@@ -1,9 +1,8 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 
-#nombre_archivo: str
+
 #claves: list[str]
 #datos: list[str]
 #fila2: dict[str, str]
@@ -11,7 +10,7 @@ import pandas as pd
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
-def leer_archivo(nombre_archivo):
+def leer_archivo(nombre_archivo:str)->list:
     archivo = open(nombre_archivo, "r")
     lista = []
 
@@ -40,7 +39,7 @@ def leer_archivo(nombre_archivo):
 #dada una lista con los datos y el nombre de una columna
 #devuelve un diccionario donde cada clave es la columna dada
 #y su valor es la cantidad de veces que aparecio
-def contar_columna(lista, columna):
+def contar_columna(lista: list, columna:str):
     contador = {}
 
     for linea in lista:

@@ -2,15 +2,12 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#nombre_archivo: str
-#claves: list[str]
-#datos: list[str]
-#fila2: dict[str, str]
-#leer_archivo: str -> list
+
+
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
-def leer_archivo(nombre_archivo):
+def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
 
@@ -32,12 +29,10 @@ def leer_archivo(nombre_archivo):
     return lista
 
 
-#contador: dict
-#contar_columna : list[dict] Str -> dict[str, int]
 #dada una lista con los datos y el nombre de una columna
 #devuelve un diccionario donde cada clave es la columna dada
 #y su valor es la cantidad de veces que aparecio
-def contar_columna(lista, columna):
+def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
     contador = {}
 
     for linea in lista:
@@ -52,13 +47,9 @@ def contar_columna(lista, columna):
 
 
 
-#porcentajes: dict[str, float]
-#total: int
-#porcentaje: float
-#calcular_porcentajes_ship_mode: dict[str, int] -> list[float]
 #dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
 #donde las claves son la columna y los valores son los porcentajes de utilizacion
-def calcular_porcentajes_columna(contador):
+def calcular_porcentajes_columna(contador:dict[str,int])-> list[float]:
     porcentajes = {}
     total = 0
     for cantidad in contador.values():
@@ -70,12 +61,11 @@ def calcular_porcentajes_columna(contador):
     
     return porcentajes
         
-#contador: dict[str, int]
-#porcentajes: dict[str, float]
-#mostrar_grafico_ship_mode: list[dict] -> None
+
+
 #dada una lista con los registros, calcula la cantidad y el porcentaje de utilizacion
 #de cada metodo de envio y muestre un grafico circular usando Matplotlib
-def mostrar_grafico_ship_mode(registros):
+def mostrar_grafico_ship_mode(registros:list[dict])-> None:
 
     contador = contar_columna(registros,"Ship Mode")
     porcentajes = calcular_porcentajes_columna(contador)
@@ -86,6 +76,7 @@ def mostrar_grafico_ship_mode(registros):
     ax.pie(sizes, labels=labels, autopct='%1.1f%%', textprops={'size': 'smaller'}, radius=0.75)
     ax.set_title("¿Cuál es el porcentaje de utilizacion de cada envio?")
     st.pyplot(fig)
+
 
 def main():
     registros = leer_archivo("SampleSuperstore_geo.csv")

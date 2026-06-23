@@ -2,15 +2,12 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#nombre_archivo: str
-#claves: list[str]
-#datos: list[str]
-#fila2: dict[str, str]
-#leer_archivo: str -> list
+
+
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
-def leer_archivo(nombre_archivo):
+def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
 
@@ -32,22 +29,25 @@ def leer_archivo(nombre_archivo):
     return lista
 
 
-
-
-def contar_ship_mode(lista):
+#dado el registro de todo el dataset
+#devuelve un diccionario con la categoria y la cantidad de apariciones que tiene
+def contar_category(lista:list[dict])-> dict[str, int]:
     contador = {}
 
     for linea in lista:
-        ship_mode = linea["Category"]
+        categoria = linea["Category"]
 
-        if ship_mode in contador:
-            contador[ship_mode] += 1
+        if categoria in contador:
+            contador[categoria] += 1
         else:
-            contador[ship_mode] = 1
+            contador[categoria] = 1
         
     return contador
 
-def calcular_porcentajes_ship_mode(contador):
+
+#dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
+#donde las claves son la columna y los valores son los porcentajes de utilizacion
+def calcular_porcentajes_category(contador:dict[str,int])-> list[float]:
     porcentajes = []
     total = 0
     for cantidad in contador.values():
@@ -60,15 +60,17 @@ def calcular_porcentajes_ship_mode(contador):
     return porcentajes
 
 
-def mostrar_grafico_ship_mode(registros):
+#dado una lista con los registros, calcula los porcentajes de las categorias mas vendidas
+#y lo muestra con un grafico circular usando Matplotlib
+def mostrar_grafico_category(registros:list[dict])-> None:
 
-    contador = contar_ship_mode(registros)
+    contador = contar_category(registros)
     
     lista2 = []
     for i in contador.keys():
         lista2.append(i)
 
-    porcentajes = calcular_porcentajes_ship_mode(contador)
+    porcentajes = calcular_porcentajes_category(contador)
 
     recipe = lista2
     data = porcentajes
@@ -97,7 +99,7 @@ def main():
     st.title ("Proyecto Grupal de Programación")
 
     registros = leer_archivo("SampleSuperstore_geo.csv")
-    mostrar_grafico_ship_mode(registros)
+    mostrar_grafico_category(registros)
 
     
 if __name__ == "__main__":
