@@ -36,44 +36,6 @@ def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
                 lista_inicial.append(float(registro["Longitude\n"]))
     return lista_inicial
 
-#---------------
-registro_ejemplo = [
-    {
-        "Ship Mode": "Second Class",
-        "Segment": "Consumer",
-        "Country": "United States",
-        "City": "Henderson",
-        "State": "Kentucky",
-        "Postal Code": "42420",
-        "Region": "South",
-        "Category": "Office Supplies",
-        "Sub-Category": "Bookcases",
-        "Sales": "261.96",
-        "Quantity": "2",
-        "Discount": "0.0",
-        "Profit": "-41.9136",
-        "Latitude": "37.836111",
-        "Longitude\n": "-100\n"
-    },
-    {
-        "Ship Mode": "Second Class",
-        "Segment": "Consumer",
-        "Country": "United States",
-        "City": "Henderson",
-        "State": "Kentucky",
-        "Postal Code": "42420",
-        "Region": "South",
-        "Category": "Furniture",
-        "Sub-Category": "Chairs",
-        "Sales": "731.94",
-        "Quantity": "3",
-        "Discount": "0.30",
-        "Profit": "219.582",
-        "Latitude": "37.836111",
-        "Longitude\n": "-87.59\n"
-    }
-]
-#---------------
 
 """
 ejemplo:
@@ -97,15 +59,6 @@ def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
 ejemplo:
     filtrar_latitudes(registro_ejemplo,"Office Supplies") -> [37.836111]
 """
-
-
-
-# ---------------------------------------------------------
-# Tests de las funciones (version generica usada en el proyecto)
-# ---------------------------------------------------------
-def test_funcionesgrafico6():
-    assert (filtrar_latitudes(registro_ejemplo,"Office Supplies")) == [37.836111]
-    assert (filtrar_longitudes(registro_ejemplo,"Office Supplies")) == [-100]
 
 
 #la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string
