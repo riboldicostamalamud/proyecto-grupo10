@@ -2,7 +2,7 @@
 #representacion del archivo del dataset que sera una lista de diccionarios.
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
-#como claves del diccionario
+#como claves del diccionario (((y como valor lo que hay en cada columna)))
 def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
@@ -49,7 +49,7 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
 #toma una lista de registros
-#devuelve una lista con todas las categorias dentro
+#devuelve una lista con la columna pedida adentro sin repetir datos
 def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
     filas = []
 
