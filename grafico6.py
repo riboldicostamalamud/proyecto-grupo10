@@ -4,7 +4,8 @@ import numpy as np
 from numpy.random import default_rng as rng
 
 
-
+#representaremos el nombre del archivo como un string. y la salida sera la
+#representacion del archivo del dataset que sera una lista de diccionarios.
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
@@ -30,6 +31,8 @@ def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     return lista
 
 
+#la entrada la representaremos como ya la habiamos representado el dataset
+#la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
 #toma una lista de registros
 #devuelve una lista con todas las categorias dentro
 def filtrar_categorias(registros:list[dict])-> list[str]:
@@ -42,6 +45,8 @@ def filtrar_categorias(registros:list[dict])-> list[str]:
     return categorias
 
 
+#la entrada la representaremos como ya la habiamos representado el dataset
+#y la salida como sera una muestra del mapa sera None
 #toma una lista de registros 
 #devuelve un menu desplegable y un mapa
 def entrada_mapa(registros:list[dict])-> None:
@@ -58,7 +63,8 @@ def entrada_mapa(registros:list[dict])-> None:
         mapa(registros, option)
 
 
-#filtrar_longitudes : List[Dict] Str -> List[float]
+#la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string
+#y la salida como espereo una lista filtrada con unicamente las longitudes, sera un lista de float
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las longitudes que dada una categoria seleccionada contenga profit negativo
 def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
@@ -71,7 +77,8 @@ def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
     return lista_inicial
 
 
-#filtrar_latitudes : List[Dict] Str -> List[float]
+#la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string
+#y la salida como espereo una lista filtrada con unicamente las latitudes, sera un lista de float
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las latitudes que dada una categoria seleccionada contenga profit negativo
 def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
@@ -84,7 +91,8 @@ def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
     return lista_inicial
 
 
-#mapa : List[Dict] Str-> None
+#la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string
+#y como la salidasera el grafico del mapa, sera un None
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve un mapa
 def mapa(registros:list[dict], seleccion:str)-> None:

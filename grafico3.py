@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
+#representaremos el nombre del archivo como un string. y la salida sera la
+#representacion del archivo del dataset que sera una lista de diccionarios.
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario
@@ -29,6 +30,9 @@ def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     return lista
 
 
+#representaremos la entrada que es la representacion del dataset el cual es una lista de diccionarios,
+# la columna de la categoria y el valor de la categoria como un string
+#y la salida la representaremos como un diccionario con clave de un valor sin repetir y como valor la suma acumulada de la columna numerica
 #la funcion toma una lista de de diccionario de los registros, una columna que se usara como categoria
 #y otra columna numerica donde sus valores se sumaran
 #devuelve un diccionario donde cada clave es un valor de la categoria(sin repetir)
@@ -49,6 +53,8 @@ def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_val
 
 
 
+#representaremos la entrada que es el dataset como una lista de diccionario
+#la salida la representaremos como un None ya que lo que hace es mostrar el grafico de barras
 #toma una lista de diccionario del dataset
 #calcula la suma de las ganancias para cada tipo de cliente
 #crea un grafico de barras donde cada barra representa un tipo de cliente

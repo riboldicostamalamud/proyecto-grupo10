@@ -316,9 +316,9 @@ def mostrar_tabla_slider(registros):
             "Ganancias": f"${ganancias[sub_categoria]:.2f}",
         })
 
-    tabla = pd.DataFrame(filas)
 
-    return st.table(tabla)
+
+    return st.table(filas)
 
 
 #==============================================================
@@ -384,9 +384,8 @@ def mapa(registros,seleccion):
     longitudes = filtrar_longitudes(registros,seleccion)
     
     dic_aux = {"lat": latitudes,"lon": longitudes}
-    df = pd.DataFrame(dic_aux)
 
-    st.map(df)
+    st.map(dic_aux)
 
 
 def main():
