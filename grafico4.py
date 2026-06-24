@@ -2,7 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-from auxiliares import filtrar_columna
+from auxiliares import filtrar_columna, sumar_por_categoria
 
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida que deseo que sea las subcategorias con la suma de cantidad de ventas de esa subcategoria, la representaremos
@@ -49,24 +49,7 @@ def maximo_descuento_sub_categoria(registros_filtrados:list[dict])->dict[str, fl
     return maximos
 
 
-#la entrada la representaremos como ya la habiamos representado el dataset y el nombre de una de las columnas como un string
-#la salida que debe ser la subcategoria con la suma de los valores de esa subcategoria, la representaremos como un diccionatrio con clave un string y valor un real
-#toma una lista de registros filtrados y el nombre de una de las columnas
-#devuelve un diccionario cuya clave es una subcategoria
-#y el valor es la suma de los valores de esa columna para dicha subcategoria
-def sumar_por_subcategoria(registros_filtrados:list[dict], columna:str)-> dict[str, float]:
-    acumulador = {}
 
-    for registro in registros_filtrados:
-        subcategoria = registro["Sub-Category"]
-        valor = float(registro[columna])
-
-        if subcategoria in acumulador:
-            acumulador[subcategoria] += valor
-        else:
-            acumulador[subcategoria] = valor
-    
-    return acumulador
 
 
 #la entrada la representaremos como ya la habiamos representado el dataset y el porsentaje sera un entero
@@ -109,8 +92,8 @@ def mostrar_tabla_slider(registros:list[dict])-> None:
     sub_categorias = filtrar_columna(registros_filtrados,"Sub-Category")
     cantidad_de_ventas = filtrar_cantidad_de_ventas(registros_filtrados)
     descuentos_maximos = maximo_descuento_sub_categoria(registros_filtrados)
-    ventas_con_descuento = sumar_por_subcategoria(registros_filtrados, "Sales")
-    ganancias = sumar_por_subcategoria(registros_filtrados,"Profit")
+    ventas_con_descuento = sumar_por_categoria(registros_filtrados,"Sub-Category", "Sales")
+    ganancias = sumar_por_categoria(registros_filtrados,"Sub-Category","Profit")
 
     filas = []
 

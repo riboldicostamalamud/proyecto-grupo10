@@ -46,6 +46,7 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
     return contador
 
 
+#================CAMBIAR RECETA=========================
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
 #toma una lista de registros
