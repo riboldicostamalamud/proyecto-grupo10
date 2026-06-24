@@ -2,41 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#representaremos la lista a contar sera el dataset con la representacion implementada
-#y la salida que es la aparicion de la columna y la cantidad de veces que aparece. la representaremos
-#con un diccionario como clave que es la categoria un string y la cantidad de veces como un entero
-#dado el registro de todo el dataset
-#devuelve un diccionario con la categoria y la cantidad de apariciones que tiene
-def contar_category(lista:list[dict])-> dict[str, int]:
-    contador = {}
-
-    for linea in lista:
-        categoria = linea["Category"]
-
-        if categoria in contador:
-            contador[categoria] += 1
-        else:
-            contador[categoria] = 1
-        
-    return contador
-
-
-#representaremos el contador de columnas como un diccionario con clave de la columna y valor la cantidad de veces que aparece
-#y la salida que es un porcentaje con el uso de cada columna, sera representado como una lista de reales.
-#dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
-#donde las claves son la columna y los valores son los porcentajes de utilizacion
-def calcular_porcentajes_category(contador:dict[str,int])-> list[float]:
-    porcentajes = []
-    total = 0
-    for cantidad in contador.values():
-        total += cantidad
-
-    for metodo in contador:
-        porcentaje = contador[metodo] * 100 / total
-        porcentajes.append(porcentaje)
-    
-    return porcentajes
-
+from auxiliares import contar_columna, calcular_porcentajes_columna, convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values
 
 #representaremos la entrada que es el dataset como una lista de diccionarios. y la salida
 #que sera mostrar el grafico como un None
@@ -44,16 +10,15 @@ def calcular_porcentajes_category(contador:dict[str,int])-> list[float]:
 #y lo muestra con un grafico circular usando Matplotlib
 def mostrar_grafico_category(registros:list[dict])-> None:
 
-    contador = contar_category(registros)
-    
-    lista2 = []
-    for i in contador.keys():
-        lista2.append(i)
+    contador = contar_columna(registros,"Category")
+    porcentajes = calcular_porcentajes_columna(contador)
 
-    porcentajes = calcular_porcentajes_category(contador)
+    contador = convertir_diccionario_a_lista_keys(contador)
+    porcentajes = convertir_diccionario_a_lista_values(porcentajes)
 
-    recipe = lista2
+    recipe = contador
     data = porcentajes
+
     fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
  
     wedges, texts, autotexts = ax.pie(data, autopct='%1.1f%%',pctdistance=0.75, wedgeprops=dict(width=0.5), startangle=-40)

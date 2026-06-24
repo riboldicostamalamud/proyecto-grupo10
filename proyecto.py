@@ -9,23 +9,6 @@ from grafico6 import entrada_mapa
 from auxiliares import leer_archivo
 
 
-#===============================================================
-#GRAFICO-2 FUNCIONES
-
-def convertir_diccionario_a_lista_values(diccionario):
-    lista = []
-    for clave in diccionario:
-        lista.append(diccionario[clave])
-    
-    return lista
-
-def convertir_diccionario_a_lista_keys(diccionario):
-    lista = []
-    for clave in diccionario.keys():
-        lista.append(clave)
-    
-    return lista
-
 
 def main():
     registros = leer_archivo("SampleSuperstore_geo.csv")

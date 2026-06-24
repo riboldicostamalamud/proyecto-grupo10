@@ -1,45 +1,6 @@
 import streamlit as st
 
-
-#sumar_por_categoria : List[Dict] Str Str -> Dict[Str, float]
-#la funcion toma una lista de diccionario de los registros, una columna que se usara como categoria
-#y otra columna numerica donde sus valores se sumaran
-#devuelve un diccionario donde cada clave es un valor de la categoria(sin repetir)
-#y cada valor es es la suma acumulada de la columna numerica dada
-def sumar_por_categoria(registros, columna_categoria, columna_valor):
-    acumulador = {}
-
-    for registro in registros:
-        categoria = registro[columna_categoria]
-        valor = float(registro[columna_valor])
-
-        if categoria in acumulador:
-            acumulador[categoria] += valor
-        else:
-            acumulador[categoria] = valor
-
-    return acumulador
-
-
-#convertir_diccionario_a_lista_values : Dict -> List
-#toma un diccionario y devuelve una lista con sus valores
-def convertir_diccionario_a_lista_values(diccionario):
-    lista = []
-    for clave in diccionario:
-        lista.append(diccionario[clave])
-    
-    return lista
-
-
-#convertir_diccionario_a_lista_keys : Dict -> List
-#toma un diccionario y devuelve una lista con sus claves
-def convertir_diccionario_a_lista_keys(diccionario):
-    lista = []
-    for clave in diccionario.keys():
-        lista.append(clave)
-    
-    return lista
-
+from auxiliares import convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values, sumar_por_categoria
 
 #filtrar_regiones : List[Dict] -> List[str]
 #toma una lista de registros

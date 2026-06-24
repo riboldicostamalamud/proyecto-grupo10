@@ -2,27 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#representaremos la entrada que es la representacion del dataset el cual es una lista de diccionarios,
-# la columna de la categoria y el valor de la categoria como un string
-#y la salida la representaremos como un diccionario con clave de un valor sin repetir y como valor la suma acumulada de la columna numerica
-#la funcion toma una lista de de diccionario de los registros, una columna que se usara como categoria
-#y otra columna numerica donde sus valores se sumaran
-#devuelve un diccionario donde cada clave es un valor de la categoria(sin repetir)
-#y cada valor es es la suma acumulada de la columna numerica dada
-def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str)-> dict[str, float]:
-    acumulador = {}
-
-    for registro in registros:
-        categoria = registro[columna_categoria]
-        valor = float(registro[columna_valor])
-
-        if categoria in acumulador:
-            acumulador[categoria] += valor
-        else:
-            acumulador[categoria] = valor
-
-    return acumulador
-
+from auxiliares import sumar_por_categoria
 
 #representaremos la entrada que es el dataset como una lista de diccionario
 #la salida la representaremos como un None ya que lo que hace es mostrar el grafico de barras
