@@ -3,18 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy.random import default_rng as rng
 
-#la entrada la representaremos como ya la habiamos representado el dataset
-#la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
-#toma una lista de registros
-#devuelve una lista con todas las categorias dentro
-def filtrar_categorias(registros:list[dict])-> list[str]:
-    categorias = []
+from auxiliares import filtrar_columna
 
-    for registro in registros:
-        if registro["Category"] not in categorias:
-            categorias.append(registro["Category"])
-    
-    return categorias
 
 
 #la entrada la representaremos como ya la habiamos representado el dataset
@@ -22,7 +12,7 @@ def filtrar_categorias(registros:list[dict])-> list[str]:
 #toma una lista de registros 
 #devuelve un menu desplegable y un mapa
 def entrada_mapa(registros:list[dict])-> None:
-    categorias = filtrar_categorias(registros)
+    categorias = filtrar_columna(registros, "Category")
     option = st.selectbox(
         "Sobre que categoria desea conocer las perdidas",
         categorias,

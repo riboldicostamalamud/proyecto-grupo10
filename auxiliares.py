@@ -46,6 +46,18 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
     return contador
 
 
+#la entrada la representaremos como ya la habiamos representado el dataset
+#la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
+#toma una lista de registros
+#devuelve una lista con todas las categorias dentro
+def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
+    filas = []
+
+    for registro in registros:
+        if registro[columna] not in filas:
+            filas.append(registro[columna])
+    
+    return filas
 
 #representare el contador de columnas como un diccionario con clave de la columna y valor la cantidad de veces que aparece
 #y la salida que es un porcentaje con el uso de cada columna, sera representado como una lista de reales.

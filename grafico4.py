@@ -2,19 +2,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-#la entrada es representada por la representacion utilizada para el dataset.
-#y la salida que seran solo las categorias, sera representada como una lista con solo las sub_categorias
-#toma la lista de diccionarios con los datos del dataset filtrados con el descuento
-#crea y devuelve una lista con los nombres de las subcategorias sin repetir
-def filtrar_sub_categorias(registros_filtrados:list[dict])->list[str]:
-    sub_categorias = []
-
-    for registro in registros_filtrados:
-        if registro["Sub-Category"] not in sub_categorias:
-            sub_categorias.append(registro["Sub-Category"])
-    
-    return sub_categorias
-
+from auxiliares import filtrar_columna
 
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida que deseo que sea las subcategorias con la suma de cantidad de ventas de esa subcategoria, la representaremos
@@ -118,7 +106,7 @@ def mostrar_tabla_slider(registros:list[dict])-> None:
     porcentaje = slider()
 
     registros_filtrados = filtrar_registros(registros,porcentaje)
-    sub_categorias = filtrar_sub_categorias(registros_filtrados)
+    sub_categorias = filtrar_columna(registros_filtrados,"Sub-Category")
     cantidad_de_ventas = filtrar_cantidad_de_ventas(registros_filtrados)
     descuentos_maximos = maximo_descuento_sub_categoria(registros_filtrados)
     ventas_con_descuento = sumar_por_subcategoria(registros_filtrados, "Sales")

@@ -1,18 +1,6 @@
 import streamlit as st
 
-from auxiliares import convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values, sumar_por_categoria
-
-#filtrar_regiones : List[Dict] -> List[str]
-#toma una lista de registros
-#devuelve una lista con todas las regiones sin repetir
-def filtrar_regiones(registros):
-    regiones = []
-
-    for registro in registros:
-        if registro["Region"] not in regiones:
-            regiones.append(registro["Region"])
-
-    return regiones
+from auxiliares import convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values, sumar_por_categoria, filtrar_columna
 
 
 #filtrar_estados_por_region : List[Dict] Str -> List[str]
@@ -63,7 +51,7 @@ def mostrar_grafico_categorias_vendidas(registros_filtrados, estado):
 #muestra un selectbox de regiones y, segun la region elegida, un selectbox de estados
 #si se selecciono region y estado, filtra los registros y muestra el grafico de categorias mas vendidas
 def entrada_region_estado(registros):
-    regiones = filtrar_regiones(registros)
+    regiones = filtrar_columna(registros,"Region")
 
     region = st.selectbox(
         "Regiones",
