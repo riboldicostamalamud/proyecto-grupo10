@@ -32,6 +32,10 @@ def main():
 
     st.set_page_config(layout="wide")
 
+    st.title("Proyecto programacion :sunglasses:",text_alignment="center")
+    st.header("Grupo 10 ",text_alignment="center")
+    st.subheader("Temario: SuperStore",text_alignment="center")
+
     with st.container(border=True):
         entrada_region_estado(registros)
 
