@@ -1,35 +1,6 @@
 import streamlit as st
 
 
-#claves: list[str]
-#datos: list[str]
-#fila2: dict[str, str]
-#leer_archivo: str -> list
-#lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
-#representa una fila del archivo, se utilizan los nombres de la columnas
-#como claves del diccionario
-def leer_archivo(nombre_archivo:str)->list:
-    archivo = open(nombre_archivo, "r")
-    lista = []
-
-    claves = archivo.readline()
-    claves = claves.split(",")
-
-    for fila in archivo:
-        datos = fila.split(",")
-
-        fila2 = {}
-
-        for i in range(len(claves)):
-            fila2[claves[i]] = datos[i]
-        
-        lista.append(fila2)
-
-    archivo.close()
-
-    return lista
-
-
 #sumar_por_categoria : List[Dict] Str Str -> Dict[Str, float]
 #la funcion toma una lista de diccionario de los registros, una columna que se usara como categoria
 #y otra columna numerica donde sus valores se sumaran
@@ -69,9 +40,6 @@ def convertir_diccionario_a_lista_keys(diccionario):
     
     return lista
 
-
-#==============================================================
-# GRAFICO-5 FUNCIONES
 
 #filtrar_regiones : List[Dict] -> List[str]
 #toma una lista de registros
@@ -157,15 +125,3 @@ def entrada_region_estado(registros):
             registros_filtrados = filtrar_registros_por_estado(registros, estado)
             mostrar_grafico_categorias_vendidas(registros_filtrados, estado)
 
-
-def main():
-    registros = leer_archivo("SampleSuperstore_geo.csv")
-
-    st.set_page_config(layout="wide")
-
-    with st.container(border=True):
-        entrada_region_estado(registros)
-
-
-if __name__ == "__main__":
-    main()

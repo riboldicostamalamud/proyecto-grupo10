@@ -2,34 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-#representaremos el nombre del archivo como un string. y la salida sera la
-#representacion del archivo del dataset que sera una lista de diccionarios.
-#lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
-#representa una fila del archivo, se utilizan los nombres de la columnas
-#como claves del diccionario
-def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
-    archivo = open(nombre_archivo, "r")
-    lista = []
-
-    claves = archivo.readline()
-    claves = claves.split(",")
-
-    for fila in archivo:
-        datos = fila.split(",")
-
-        fila2 = {}
-
-        for i in range(len(claves)):
-            fila2[claves[i]] = datos[i]
-        
-        lista.append(fila2)
-
-    archivo.close()
-
-    return lista
-
-
 #representaremos la entrada que es la representacion del dataset el cual es una lista de diccionarios,
 # la columna de la categoria y el valor de la categoria como un string
 #y la salida la representaremos como un diccionario con clave de un valor sin repetir y como valor la suma acumulada de la columna numerica
@@ -50,7 +22,6 @@ def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_val
             acumulador[categoria] = valor
 
     return acumulador
-
 
 
 #representaremos la entrada que es el dataset como una lista de diccionario
@@ -79,13 +50,3 @@ def mostrar_grafico_barras(registros:list[dict])-> None:
     plt.show()
     st.pyplot(fig)
 
-
-def main():
-    st.title ("Proyecto Grupal de Programación")
-
-    registros = leer_archivo("SampleSuperstore_geo.csv")
-
-    mostrar_grafico_barras(registros)
-    
-if __name__ == "__main__":
-    main()
