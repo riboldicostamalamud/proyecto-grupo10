@@ -49,9 +49,6 @@ def maximo_descuento_sub_categoria(registros_filtrados:list[dict])->dict[str, fl
     return maximos
 
 
-
-
-
 #la entrada la representaremos como ya la habiamos representado el dataset y el porsentaje sera un entero
 #la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de diccionarios 
 #toma los registros del dataset y un porcentaje de descuento
@@ -66,6 +63,7 @@ def filtrar_registros(registros:list[dict],porcentaje:int)->list[dict]:
             registros_filtrados.append(registro)
 
     return registros_filtrados
+
 
 #la salida como sera un dibujo del slider, sera representado como un None
 #muestra un slider con los valores entre 0 y 100

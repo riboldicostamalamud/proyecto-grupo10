@@ -5,8 +5,6 @@ from numpy.random import default_rng as rng
 
 from auxiliares import filtrar_columna
 
-
-
 #la entrada la representaremos como ya la habiamos representado el dataset
 #y la salida como sera una muestra del mapa sera None
 #toma una lista de registros 

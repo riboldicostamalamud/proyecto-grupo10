@@ -46,7 +46,6 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
     return contador
 
 
-#================CAMBIAR RECETA=========================
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
 #toma una lista de registros
@@ -60,7 +59,8 @@ def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
     
     return filas
 
-#representare el contador de columnas como un diccionario con clave de la columna y valor la cantidad de veces que aparece
+
+#representaremos el contador de columnas como un diccionario con clave de la columna y valor la cantidad de veces que aparece
 #y la salida que es un porcentaje con el uso de cada columna, sera representado como una lista de reales.
 #dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
 #donde las claves son la columna y los valores son los porcentajes de utilizacion
@@ -77,18 +77,17 @@ def calcular_porcentajes_columna(contador:dict[str,int])-> list[float]:
     return porcentajes
 
 
-#convertir_diccionario_a_lista_values : Dict -> List
 #toma un diccionario y devuelve una lista con sus valores
-def convertir_diccionario_a_lista_values(diccionario):
+def convertir_diccionario_a_lista_values(diccionario:dict)->list:
     lista = []
     for clave in diccionario:
         lista.append(diccionario[clave])
     
     return lista
 
-#convertir_diccionario_a_lista_keys : Dict -> List
+
 #toma un diccionario y devuelve una lista con sus claves
-def convertir_diccionario_a_lista_keys(diccionario):
+def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
     lista = []
     for clave in diccionario.keys():
         lista.append(clave)
