@@ -1,6 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import numpy as np
 
 from auxiliares import filtrar_columna, sumar_por_categoria
 

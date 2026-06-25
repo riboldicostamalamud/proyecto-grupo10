@@ -1,0 +1,5 @@
+Ship Mode,Segment,Country,City,State,Postal Code,Region,Category,Sub-Category,Sales,Quantity,Discount,Profit,Latitude,Longitude
+Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Office Supplies,Bookcases,261.96,2,0.0,-41.9136,37.836111,-100
+Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Bookcases,261.96,2,0.1,41.9136,37.836111,-87.59
+Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Chairs,731.94,3,0.1,219.582,37.836111,-87.59
+Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Chairs,731.94,3,0.5,219.582,37.836111,-87.59

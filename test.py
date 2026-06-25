@@ -1,8 +1,9 @@
-from auxiliares import contar_columna
-from auxiliares import filtrar_columna, convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values
-from grafico4 import filtrar_registros, maximo_descuento_sub_categoria, filtrar_cantidad_de_ventas
+from auxiliares import filtrar_columna, convertir_diccionario_a_lista_keys, convertir_diccionario_a_lista_values, contar_columna, leer_archivo,calcular_porcentajes_columna, sumar_por_categoria
+from grafico4 import filtrar_registros, maximo_descuento_sub_categoria
 from grafico5 import filtrar_estados_por_region, filtrar_registros_por_estado
 from grafico6 import filtrar_latitudes, filtrar_longitudes
+
+archivo = "ejemplo_archivos.csv"
 
 registros = [
     {
@@ -71,10 +72,22 @@ registros = [
         "Discount": "0.5",
         "Profit": "219.582",
         "Latitude": "37.836111",
-        "Longitude\n": "-87.59\n"
+        "Longitude\n": "-87.59"
     }
 ]
-
+#===================TEST_Auxiliar=======================
+def test_auxiliares():
+    assert (leer_archivo(archivo)) == registros
+    assert (contar_columna(registros, "Category")) == {"Office Supplies": 1,"Furniture":3}
+    assert (contar_columna(registros, "Ship Mode")) == {"Second Class":4}
+    assert (filtrar_columna(registros,"Sub-Category")) == ["Bookcases", "Chairs"]
+    assert (filtrar_columna(registros,"Region")) == ["South"]
+    assert (calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3})) == {"Furniture": 75.0,"Office Supplies": 25.0}
+    assert (calcular_porcentajes_columna({"Second Class":4})) == {"Second Class": 100}
+    assert (convertir_diccionario_a_lista_keys({"hola":123,"312":"hola"})) == ["hola","312"]
+    assert (convertir_diccionario_a_lista_values({"hola":123,"312":"hola"})) == [123,"hola"]
+    assert (sumar_por_categoria(registros,"Segment", "Profit", float)) == {"Consumer": 439.164}
+    assert (sumar_por_categoria(registros,"Sub-Category", "Sales", float)) == {"Bookcases": 523.92, "Chairs": 1463.88}
 
 
 
@@ -96,7 +109,7 @@ def test_filtrar_registros():
             "Discount": "0.5",
             "Profit": "219.582",
             "Latitude": "37.836111",
-            "Longitude\n": "-87.59\n"
+            "Longitude\n": "-87.59"
         }
     ]
     assert filtrar_registros(registros, 0) == registros

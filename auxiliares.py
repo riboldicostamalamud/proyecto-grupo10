@@ -77,7 +77,7 @@ ejemplo:
         "Discount": "0.5",
         "Profit": "219.582",
         "Latitude": "37.836111",
-        "Longitude\n": "-87.59\n"
+        "Longitude\n": "-87.59"
     }
 ]
  
@@ -180,7 +180,7 @@ def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
         "Discount": "0.5",
         "Profit": "219.582",
         "Latitude": "37.836111",
-        "Longitude\n": "-87.59\n"
+        "Longitude\n": "-87.59"
     }
 ]
 ejemplo: 
@@ -208,7 +208,7 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
 #devuelve una lista con la columna pedida adentro sin repetir datos
 """
 ejemplos:
-        filtrar_columna(lista,"Sub-Category") -> ["Bookcases, Chairs"]
+        filtrar_columna(lista,"Sub-Category") -> ["Bookcases", "Chairs"]
         filtrar_columna(lista,"Region") -> ["South"]
 """
 def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
@@ -222,15 +222,15 @@ def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
 
 
 #representaremos el contador de columnas como un diccionario con clave de la columna y valor la cantidad de veces que aparece
-#y la salida que es un porcentaje con el uso de cada columna, sera representado como una lista de reales.
+#y la salida que es un porcentaje con el uso de cada columna, sera representado como un diccionario con clave el nombre de la columna osea str y valor el porcentaje, representado como un float.
 #dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
 #donde las claves son la columna y los valores son los porcentajes de utilizacion
 """
 ejemplos:
-        calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3}) -> [1/4,3/4]
-        calcular_porcentajes_columna({"Second Class":4}) -> [100]
+        calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3}) -> {"Furniture":0.75,"Office Supplies": 0.25}
+        calcular_porcentajes_columna({"Second Class":4}) -> {"Second Class" : 100}
 """
-def calcular_porcentajes_columna(contador:dict[str,int])-> list[float]:
+def calcular_porcentajes_columna(contador:dict[str,int])-> dict[str,float]:
     porcentajes = {}
     total = 0
     for cantidad in contador.values():
@@ -259,7 +259,7 @@ def convertir_diccionario_a_lista_values(diccionario:dict)->list:
 #toma un diccionario y devuelve una lista con sus claves
 """
 ejemplos:
-        convertir_diccionario_a_lista_values({"hola":123,"312":"hola"}) -> ["hola","312"]
+        convertir_diccionario_a_lista_keys({"hola":123,"312":"hola"}) -> ["hola","312"]
 """
 def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
     lista = []
@@ -270,7 +270,7 @@ def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
 
 
 #representaremos la entrada que es la representacion del dataset el cual es una lista de diccionarios,
-# la columna de la categoria y el valor de la categoria como un string
+# la columna de la categoria y el valor de la categoria como un string, el tipo se refiere al type de el valor, int o float respectivamente
 #y la salida la representaremos como un diccionario con clave de un valor sin repetir y como valor la suma acumulada de la columna numerica
 #la funcion toma una lista de de diccionario de los registros, una columna que se usara como categoria
 #y otra columna numerica donde sus valores se sumaran
@@ -278,8 +278,8 @@ def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
 #y cada valor es es la suma acumulada de la columna numerica dada
 """
 ejemplo:
-        sumar_por_categoria(lista,"Segment", "Profit") -> {"Consumer": 439.164}
-        sumar_por_categoria(lista,"Sub-Category", "Sales") -> {"Bookcases": 523.92, "Chairs": 1463.88}
+        sumar_por_categoria(lista,"Segment", "Profit", float) -> {"Consumer": 439.164}
+        sumar_por_categoria(lista,"Sub-Category", "Sales", float) -> {"Bookcases": 523.92, "Chairs": 1463.88}
 """
 def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str, tipo)-> dict[str, float]:
     acumulador = {}
