@@ -115,6 +115,8 @@ def test_maximo_descuento_sub_categoria():
 def test_funcionesgrafico6():
     assert (filtrar_latitudes(registros,"Office Supplies")) == [37.836111]
     assert (filtrar_longitudes(registros,"Office Supplies")) == [-100]
+    assert (filtrar_latitudes(registros,"Technology")) == []
+    assert (filtrar_longitudes(registros,"Furniture")) == []
 
 
 

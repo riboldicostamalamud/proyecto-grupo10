@@ -27,6 +27,11 @@ def entrada_mapa(registros:list[dict])-> None:
 #y la salida como espereo una lista filtrada con unicamente las longitudes, sera un lista de float
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las longitudes que dada una categoria seleccionada contenga profit negativo
+"""
+ejemplo:
+    filtrar_longitudes(registro_ejemplo,"Office Supplies") -> [100]
+    (filtrar_longitudes(registros,"Furniture") == []
+"""
 def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
     lista_inicial = []
 
@@ -37,15 +42,17 @@ def filtrar_longitudes(registros: list[dict], seleccion:str)-> list[float]:
     return lista_inicial
 
 
-"""
-ejemplo:
-    filtrar_longitudes(registro_ejemplo,"Office Supplies") -> [100]
-"""
+
 
 #la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string
 #y la salida como espereo una lista filtrada con unicamente las latitudes, sera un lista de float
 #toma una lista de registros y un string que hace referencia a una categoria seleccionada
 #devuelve una lista con todas las latitudes que dada una categoria seleccionada contenga profit negativo
+"""
+ejemplo:
+    filtrar_latitudes(registro_ejemplo,"Office Supplies") -> [37.836111]
+    (filtrar_latitudes(registros,"Technology") == []
+"""
 def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
     lista_inicial = []
 
@@ -55,10 +62,7 @@ def filtrar_latitudes(registros:list[dict],seleccion:str)-> list[float]:
                 lista_inicial.append(float(registro["Latitude"]))
     return lista_inicial
 
-"""
-ejemplo:
-    filtrar_latitudes(registro_ejemplo,"Office Supplies") -> [37.836111]
-"""
+
 
 
 #la entrada la representaremos como ya la habiamos representado el dataset y la seleccion la representare como un string

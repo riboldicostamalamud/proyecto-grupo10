@@ -3,6 +3,85 @@
 #lee el dataset y devuelve una lista de diccionarios, donde cada diccionario
 #representa una fila del archivo, se utilizan los nombres de la columnas
 #como claves del diccionario (((y como valor lo que hay en cada columna)))
+"""
+ejemplo:
+    archivo = Ship Mode,Segment,Country,City,State,Postal Code,Region,Category,Sub-Category,Sales,Quantity,Discount,Profit,Latitude,Longitude
+            Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Office Supplies,Bookcases,261.96,2,0.0,-41.9136,37.836111,-100
+            Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Bookcases,261.96,2,0.1,41.9136,37.836111,-87.59
+            Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Chairs,731.94,3,0.1,219.582,37.836111,-87.59
+            Second Class,Consumer,United States,Henderson,Kentucky,42420,South,Furniture,Chairs,731.94,3,0.5,219.582,37.836111,-87.59
+    leer_archivo(archivo) -> [
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Office Supplies",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.0",
+        "Profit": "-41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-100\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.1",
+        "Profit": "41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Chairs",
+        "Sales": "731.94",
+        "Quantity": "3",
+        "Discount": "0.1",
+        "Profit": "219.582",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Chairs",
+        "Sales": "731.94",
+        "Quantity": "3",
+        "Discount": "0.5",
+        "Profit": "219.582",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    }
+]
+ 
+"""
 def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
     archivo = open(nombre_archivo, "r")
     lista = []
@@ -32,6 +111,83 @@ def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
 #dada una lista con los datos y el nombre de una columna
 #devuelve un diccionario donde cada clave es la columna dada
 #y su valor es la cantidad de veces que aparecio
+
+ """
+ lista = [
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Office Supplies",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.0",
+        "Profit": "-41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-100\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.1",
+        "Profit": "41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Chairs",
+        "Sales": "731.94",
+        "Quantity": "3",
+        "Discount": "0.1",
+        "Profit": "219.582",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Chairs",
+        "Sales": "731.94",
+        "Quantity": "3",
+        "Discount": "0.5",
+        "Profit": "219.582",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    }
+]
+ejemplo: 
+        contar_columna(lista, "Category") -> {"Office Supplies": 1,"Furniture":3}
+        contar_columna(lista, "Ship Mode") -> {"Second Class":4}
+
+"""
 def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
     contador = {}
 
@@ -50,6 +206,11 @@ def contar_columna(lista:list[dict], columna:str)-> dict[str, int]:
 #la salida, como esperamos que devuelva una lista con los registros filtrados, la representaremos como una lista de strings 
 #toma una lista de registros
 #devuelve una lista con la columna pedida adentro sin repetir datos
+"""
+ejemplos:
+        filtrar_columna(lista,"Sub-Category") -> ["Bookcases, Chairs"]
+        filtrar_columna(lista,"Region") -> ["South"]
+"""
 def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
     filas = []
 
@@ -64,6 +225,11 @@ def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
 #y la salida que es un porcentaje con el uso de cada columna, sera representado como una lista de reales.
 #dado un diccionario que contiene la columna como clave y la cantidad de veces que aparece como valor, devuelve un diccionario
 #donde las claves son la columna y los valores son los porcentajes de utilizacion
+"""
+ejemplos:
+        calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3}) -> [1/4,3/4]
+        calcular_porcentajes_columna({"Second Class":4}) -> [100]
+"""
 def calcular_porcentajes_columna(contador:dict[str,int])-> list[float]:
     porcentajes = {}
     total = 0
@@ -78,6 +244,10 @@ def calcular_porcentajes_columna(contador:dict[str,int])-> list[float]:
 
 
 #toma un diccionario y devuelve una lista con sus valores
+"""
+ejemplos:
+        convertir_diccionario_a_lista_values({"hola":123,"312":"hola"}) -> [123,"hola"]
+"""
 def convertir_diccionario_a_lista_values(diccionario:dict)->list:
     lista = []
     for clave in diccionario:
@@ -87,6 +257,10 @@ def convertir_diccionario_a_lista_values(diccionario:dict)->list:
 
 
 #toma un diccionario y devuelve una lista con sus claves
+"""
+ejemplos:
+        convertir_diccionario_a_lista_values({"hola":123,"312":"hola"}) -> ["hola","312"]
+"""
 def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
     lista = []
     for clave in diccionario.keys():
@@ -102,12 +276,17 @@ def convertir_diccionario_a_lista_keys(diccionario:dict)-> list:
 #y otra columna numerica donde sus valores se sumaran
 #devuelve un diccionario donde cada clave es un valor de la categoria(sin repetir)
 #y cada valor es es la suma acumulada de la columna numerica dada
+"""
+ejemplo:
+        sumar_por_categoria(lista,"Segment", "Profit") -> {"Consumer": 439.164}
+        sumar_por_categoria(lista,"Sub-Category", "Sales") -> {"Bookcases": 523.92, "Chairs": 1463.88}
+"""
 def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str)-> dict[str, float]:
     acumulador = {}
 
     for registro in registros:
         categoria = registro[columna_categoria]
-        valor = float(registro[columna_valor])
+        valor = float(registro[columna_valor])                  #futura pregunta de tipo
 
         if categoria in acumulador:
             acumulador[categoria] += valor
