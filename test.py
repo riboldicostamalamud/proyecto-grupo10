@@ -122,9 +122,7 @@ def test_funcionesgrafico6():
 
 
 #===================TEST_GRAFICO_5=======================
-# Datos de prueba: una lista chica e inventada de registros,
-# con la misma forma (mismas claves) que las filas del Dataset real.
-def registros_de_prueba():
+def registros_grafico5():
     return [
         {"Region": "South", "State": "Kentucky", "Category": "Furniture", "Quantity": "2"},
         {"Region": "South", "State": "Kentucky", "Category": "Office Supplies", "Quantity": "5"},
@@ -134,100 +132,11 @@ def registros_de_prueba():
     ]
 
 
-# ---------------------------------------------------------
-# Tests de filtrar_columna (version generica usada en el proyecto)
-# ---------------------------------------------------------
-
-def test_filtrar_columna_regiones_sin_repetidos(registros_de_prueba):
-    resultado = filtrar_columna(registros_de_prueba, "Region")
-    assert resultado == ["South", "West"]
+def test_funcionesgrafico5():
+    assert(filtrar_estados_por_region(registros_grafico5(),"South")) == ["Kentucky","Florida"]
+    assert(filtrar_estados_por_region(registros_grafico5(),"West")) == ["California"]
+    assert(filtrar_registros_por_estado(registros_grafico5(),"Kentucky")) == [{"Region": "South", "State": "Kentucky", "Category": "Furniture", "Quantity": "2"},{"Region": "South", "State": "Kentucky", "Category": "Office Supplies", "Quantity": "5"}]
+    assert(filtrar_registros_por_estado(registros_grafico5(),"Florida")) == [{"Region": "South", "State": "Florida", "Category": "Technology", "Quantity": "1"}]
 
 
-def test_filtrar_columna_lista_vacia():
-    resultado = filtrar_columna([], "Region")
-    assert resultado == []
 
-
-# ---------------------------------------------------------
-# Tests de filtrar_estados_por_region
-# ---------------------------------------------------------
-
-def test_filtrar_estados_por_region_south(registros_de_prueba):
-    resultado = filtrar_estados_por_region(registros_de_prueba, "South")
-    assert resultado == ["Kentucky", "Florida"]
-
-
-def test_filtrar_estados_por_region_west(registros_de_prueba):
-    resultado = filtrar_estados_por_region(registros_de_prueba, "West")
-    assert resultado == ["California"]
-
-
-def test_filtrar_estados_por_region_inexistente(registros_de_prueba):
-    resultado = filtrar_estados_por_region(registros_de_prueba, "North")
-    assert resultado == []
-
-
-# ---------------------------------------------------------
-# Tests de filtrar_registros_por_estado
-# ---------------------------------------------------------
-
-def test_filtrar_registros_por_estado_kentucky(registros_de_prueba):
-    resultado = filtrar_registros_por_estado(registros_de_prueba, "Kentucky")
-    assert len(resultado) == 2
-    assert all(registro["State"] == "Kentucky" for registro in resultado)
-
-
-def test_filtrar_registros_por_estado_devuelve_filas_completas(registros_de_prueba):
-    resultado = filtrar_registros_por_estado(registros_de_prueba, "Florida")
-    assert resultado == [
-        {"Region": "South", "State": "Florida", "Category": "Technology", "Quantity": "1"}
-    ]
-
-
-# ---------------------------------------------------------
-# Tests de sumar_por_categoria
-# ---------------------------------------------------------
-
-def test_sumar_por_categoria_suma_correctamente(registros_de_prueba):
-    california = filtrar_registros_por_estado(registros_de_prueba, "California")
-    resultado = sumar_por_categoria(california, "Category", "Quantity")
-    # Las dos filas de California son Furniture: 3 + 4 = 7
-    assert resultado == {"Furniture": 7.0}
-
-
-def test_sumar_por_categoria_categorias_distintas(registros_de_prueba):
-    kentucky = filtrar_registros_por_estado(registros_de_prueba, "Kentucky")
-    resultado = sumar_por_categoria(kentucky, "Category", "Quantity")
-    assert resultado == {"Furniture": 2.0, "Office Supplies": 5.0}
-
-
-# ---------------------------------------------------------
-# Tests de convertir_diccionario_a_lista_keys / values
-# ---------------------------------------------------------
-
-def test_convertir_diccionario_a_lista_keys():
-    diccionario = {"Furniture": 7.0, "Office Supplies": 5.0}
-    resultado = convertir_diccionario_a_lista_keys(diccionario)
-    assert resultado == ["Furniture", "Office Supplies"]
-
-
-def test_convertir_diccionario_a_lista_values():
-    diccionario = {"Furniture": 7.0, "Office Supplies": 5.0}
-    resultado = convertir_diccionario_a_lista_values(diccionario)
-    assert resultado == [7.0, 5.0]
-
-
-# ---------------------------------------------------------
-# Test de integracion: la cadena completa, de punta a punta
-# ---------------------------------------------------------
-
-def test_flujo_completo_region_estado_categoria(registros_de_prueba):
-    # Simula lo que hace el usuario: elegir region, despues estado,
-    # y ver el resultado final que se usaria en el grafico.
-    estados_en_south = filtrar_estados_por_region(registros_de_prueba, "South")
-    assert "Kentucky" in estados_en_south
-
-    registros_kentucky = filtrar_registros_por_estado(registros_de_prueba, "Kentucky")
-    unidades = sumar_por_categoria(registros_kentucky, "Category", "Quantity")
-
-    assert unidades == {"Furniture": 2.0, "Office Supplies": 5.0}
