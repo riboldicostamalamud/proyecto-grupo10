@@ -82,7 +82,7 @@ def test_auxiliares():
     assert (contar_columna(registros, "Ship Mode")) == {"Second Class":4}
     assert (filtrar_columna(registros,"Sub-Category")) == ["Bookcases", "Chairs"]
     assert (filtrar_columna(registros,"Region")) == ["South"]
-    assert (calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3})) == {"Furniture": 75.0,"Office Supplies": 25.0}
+    assert (calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3})) == {"Office Supplies": 25.0,"Furniture": 75.0}
     assert (calcular_porcentajes_columna({"Second Class":4})) == {"Second Class": 100}
     assert (convertir_diccionario_a_lista_keys({"hola":123,"312":"hola"})) == ["hola","312"]
     assert (convertir_diccionario_a_lista_values({"hola":123,"312":"hola"})) == [123,"hola"]

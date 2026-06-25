@@ -44,7 +44,7 @@ def filtrar_registros(registros:list[dict],porcentaje:int)->list[dict]:
 
 
 #la salida como sera un dibujo del slider, sera representado como un None
-#muestra un slider con los valores entre 0 y 100
+#muestra un slider con los valores entre 10 y 80
 #permite al usuario seleccionar un porcentaje de descuento
 #devuelve el porcentaje elegido
 def slider()->None :

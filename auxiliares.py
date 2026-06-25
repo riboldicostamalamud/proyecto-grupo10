@@ -227,7 +227,7 @@ def filtrar_columna(registros:list[dict], columna:[str])-> list[str]:
 #donde las claves son la columna y los valores son los porcentajes de utilizacion
 """
 ejemplos:
-        calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3}) -> {"Furniture":0.75,"Office Supplies": 0.25}
+        calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3}) -> {"Office Supplies": 25.0,"Furniture":75.0}
         calcular_porcentajes_columna({"Second Class":4}) -> {"Second Class" : 100}
 """
 def calcular_porcentajes_columna(contador:dict[str,int])-> dict[str,float]:
