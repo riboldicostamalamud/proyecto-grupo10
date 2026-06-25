@@ -13,7 +13,7 @@ from auxiliares import sumar_por_categoria
 #muestra el grafico utilizando matplotlib
 def mostrar_grafico_barras(registros:list[dict])-> None:
 
-    ganancias = sumar_por_categoria(registros, "Segment", "Profit")
+    ganancias = sumar_por_categoria(registros, "Segment", "Profit",float)
     
     fig, ax = plt.subplots()
 

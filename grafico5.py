@@ -37,7 +37,7 @@ def filtrar_registros_por_estado(registros:list[dict], estado:str)-> list[dict]:
 #calcula la cantidad de unidades vendidas (Quantity) por categoria
 #muestra un grafico de barras horizontal usando st.bar_chart
 def mostrar_grafico_categorias_vendidas(registros_filtrados:list[dict], estado:str)-> None:
-    unidades = sumar_por_categoria(registros_filtrados, "Category", "Quantity")
+    unidades = sumar_por_categoria(registros_filtrados, "Category", "Quantity",float)
 
     categorias = convertir_diccionario_a_lista_keys(unidades)
     cantidades = convertir_diccionario_a_lista_values(unidades)

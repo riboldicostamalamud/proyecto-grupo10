@@ -4,26 +4,6 @@ import numpy as np
 
 from auxiliares import filtrar_columna, sumar_por_categoria
 
-#la entrada la representaremos como ya la habiamos representado el dataset
-#la salida que deseo que sea las subcategorias con la suma de cantidad de ventas de esa subcategoria, la representaremos
-#como un diccionario con clave strings y como valor un entero
-#toma una lista con los registros filtrados
-#devuelve un diccionario con cuya clave es una subcategoria
-#y el valor es la suma de las cantidades de vendidas de esa subcategoria
-def filtrar_cantidad_de_ventas(registros_filtrados:list[dict])->dict[str, int]:
-    acumulador = {}
-
-    for registro in registros_filtrados:
-        subcategoria = registro["Sub-Category"]
-        cantidad = int(registro["Quantity"])
-
-        if subcategoria in acumulador:
-            acumulador[subcategoria] += cantidad
-        else:
-            acumulador[subcategoria] = cantidad
-
-    return acumulador
-
 
 #la entrada la representaremos como ya la habiamos representado el dataset
 #la salida que deseo que sea las subcategorias con el descuento maximo aplicado de esa subcategoria, la representaremos 
@@ -88,10 +68,10 @@ def mostrar_tabla_slider(registros:list[dict])-> None:
 
     registros_filtrados = filtrar_registros(registros,porcentaje)
     sub_categorias = filtrar_columna(registros_filtrados,"Sub-Category")
-    cantidad_de_ventas = filtrar_cantidad_de_ventas(registros_filtrados)
+    cantidad_de_ventas = sumar_por_categoria(registros_filtrados,"Sub-Category","Quantity",int)
     descuentos_maximos = maximo_descuento_sub_categoria(registros_filtrados)
-    ventas_con_descuento = sumar_por_categoria(registros_filtrados,"Sub-Category", "Sales")
-    ganancias = sumar_por_categoria(registros_filtrados,"Sub-Category","Profit")
+    ventas_con_descuento = sumar_por_categoria(registros_filtrados,"Sub-Category", "Sales",float)
+    ganancias = sumar_por_categoria(registros_filtrados,"Sub-Category","Profit",float)
 
     filas = []
 

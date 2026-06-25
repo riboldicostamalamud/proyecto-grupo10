@@ -281,12 +281,12 @@ ejemplo:
         sumar_por_categoria(lista,"Segment", "Profit") -> {"Consumer": 439.164}
         sumar_por_categoria(lista,"Sub-Category", "Sales") -> {"Bookcases": 523.92, "Chairs": 1463.88}
 """
-def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str)-> dict[str, float]:
+def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str, tipo)-> dict[str, float]:
     acumulador = {}
 
     for registro in registros:
         categoria = registro[columna_categoria]
-        valor = float(registro[columna_valor])                  #futura pregunta de tipo
+        valor = tipo(registro[columna_valor])
 
         if categoria in acumulador:
             acumulador[categoria] += valor
