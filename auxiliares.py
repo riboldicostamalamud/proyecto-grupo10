@@ -112,7 +112,7 @@ def leer_archivo(nombre_archivo:str)-> list[dict[str, str]]:
 #devuelve un diccionario donde cada clave es la columna dada
 #y su valor es la cantidad de veces que aparecio
 
- """
+"""
  lista = [
     {
         "Ship Mode": "Second Class",
