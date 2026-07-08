@@ -19,7 +19,7 @@ def entrada_mapa(registros:list[dict])-> None:
     )
 
     st.write("Usted selecciono:", option)
-    if option is not None:
+    if option != None:
         mapa(registros, option)
 
 

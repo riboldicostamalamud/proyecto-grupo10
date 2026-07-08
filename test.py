@@ -75,19 +75,86 @@ registros = [
         "Longitude\n": "-87.59"
     }
 ]
+registros_test_cord = [
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Office Supplies",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.0",
+        "Profit": "-41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-100\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Furniture",
+        "Sub-Category": "Bookcases",
+        "Sales": "261.96",
+        "Quantity": "2",
+        "Discount": "0.1",
+        "Profit": "41.9136",
+        "Latitude": "37.836111",
+        "Longitude\n": "-87.59\n"
+    },
+    {
+        "Ship Mode": "Second Class",
+        "Segment": "Consumer",
+        "Country": "United States",
+        "City": "Henderson",
+        "State": "Kentucky",
+        "Postal Code": "42420",
+        "Region": "South",
+        "Category": "Office Supplies",
+        "Sub-Category": "Chairs",
+        "Sales": "731.94",
+        "Quantity": "3",
+        "Discount": "0.5",
+        "Profit": "-219.582",
+        "Latitude": "200",
+        "Longitude\n": "-900"
+    }
+]
 #===================TEST_Auxiliar=======================
 def test_auxiliares():
     assert (leer_archivo(archivo)) == registros
+
     assert (contar_columna(registros, "Category")) == {"Office Supplies": 1,"Furniture":3}
     assert (contar_columna(registros, "Ship Mode")) == {"Second Class":4}
+    assert (contar_columna({}, "Ship Mode")) == {}
+
     assert (filtrar_columna(registros,"Sub-Category")) == ["Bookcases", "Chairs"]
     assert (filtrar_columna(registros,"Region")) == ["South"]
+    assert (filtrar_columna({},"Region")) == []
+
+
     assert (calcular_porcentajes_columna({"Office Supplies": 1,"Furniture":3})) == {"Office Supplies": 25.0,"Furniture": 75.0}
     assert (calcular_porcentajes_columna({"Second Class":4})) == {"Second Class": 100}
+    assert (calcular_porcentajes_columna({})) == {}
+
+
     assert (convertir_diccionario_a_lista_keys({"hola":123,"312":"hola"})) == ["hola","312"]
+    assert (convertir_diccionario_a_lista_keys({})) == []
+
     assert (convertir_diccionario_a_lista_values({"hola":123,"312":"hola"})) == [123,"hola"]
+    assert (convertir_diccionario_a_lista_values({})) == []
+    
     assert (sumar_por_categoria(registros,"Segment", "Profit", float)) == {"Consumer": 439.164}
     assert (sumar_por_categoria(registros,"Sub-Category", "Sales", float)) == {"Bookcases": 523.92, "Chairs": 1463.88}
+    assert (sumar_por_categoria({},"Sub-Category", "Sales", float)) == {}
 
 
 
@@ -128,6 +195,8 @@ def test_maximo_descuento_sub_categoria():
 def test_funcionesgrafico6():
     assert (filtrar_latitudes(registros,"Office Supplies")) == [37.836111]
     assert (filtrar_longitudes(registros,"Office Supplies")) == [-100]
+    assert (filtrar_latitudes(registros_test_cord,"Office Supplies")) == [37.836111,200]
+    assert (filtrar_longitudes(registros_test_cord,"Office Supplies")) == [-100,-900]
     assert (filtrar_latitudes(registros,"Technology")) == []
     assert (filtrar_longitudes(registros,"Furniture")) == []
 

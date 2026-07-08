@@ -281,7 +281,7 @@ ejemplo:
         sumar_por_categoria(lista,"Segment", "Profit", float) -> {"Consumer": 439.164}
         sumar_por_categoria(lista,"Sub-Category", "Sales", float) -> {"Bookcases": 523.92, "Chairs": 1463.88}
 """
-def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str, tipo)-> dict[str, float]:
+def sumar_por_categoria(registros:list[dict], columna_categoria:str, columna_valor:str, tipo: type)-> dict[str, float]:
     acumulador = {}
 
     for registro in registros:
