@@ -18,6 +18,7 @@ def main():
     st.title("Proyecto programacion :sunglasses:",text_alignment="center")
     st.header("Grupo 10 ",text_alignment="center")
     st.subheader("Temario: SuperStore",text_alignment="center")
+    st.subheader("Integrantes: Riboldi Juan Cruz - Costa Alejo - Malamud Tomas", text_alignment="center")
 
     with st.container(border=True):
         entrada_region_estado(registros)
