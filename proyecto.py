@@ -21,6 +21,7 @@ def main():
     st.subheader("Integrantes: Riboldi Juan Cruz - Costa Alejo - Malamud Tomas", text_alignment="center")
 
     with st.container(border=True):
+        st.title("¿Qué categorías son las más vendidas en un estado determinado?")
         entrada_region_estado(registros)
 
     col1, col2 = st.columns(2)
@@ -44,6 +45,7 @@ def main():
             mostrar_grafico_barras(registros)
 
     with st.container(border=True):
+        st.title("¿En qué estados hubieron perdidas para cierta categoria?")
         entrada_mapa(registros)
 
     
